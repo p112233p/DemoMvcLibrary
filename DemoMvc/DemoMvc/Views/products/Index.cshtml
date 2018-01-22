@@ -1,0 +1,87 @@
+﻿@model IEnumerable<DemoClassLibrary.Models.product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.p_prodname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_classid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_display)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_onshaffdateb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_onshaffdaten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_playseq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_packagetext)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_functiontext)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_prodname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_classid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_display)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_onshaffdateb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_onshaffdaten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_playseq)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_packagetext)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_functiontext)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.p_prodid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.p_prodid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.p_prodid })
+        </td>
+    </tr>
+}
+
+</table>
