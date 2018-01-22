@@ -14,7 +14,7 @@ namespace DemoClassLibrary.Interface
         void Delete(TEntity instance);
         TEntity Get(Expression<Func<TEntity, bool>> predicate);
         double GetMax(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, double>> predicate2);
-        TEntity GetFist(string conntr);
-        IQueryable<TEntity> GetAll(string conntr);
+        TEntity GetFist();
+        IQueryable<TEntity> GetAll();
     }
 }
