@@ -7,17 +7,21 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DemoClassLibrary.Models;
+using DemoClassLibrary.Interface;
+using DemoClassLibrary.Repository;
 
 namespace DemoMvc.Controllers
 {
     public class productsController : Controller
     {
         private testEntities db = new testEntities();
+        public IRepository<product> repo_product = new Repository<product>();
 
         // GET: products
         public ActionResult Index()
         {
-            return View(db.product.ToList());
+            //return View(db.product.ToList());
+            return View(repo_product.GetAll());
         }
 
         // GET: products/Details/5
@@ -27,7 +31,8 @@ namespace DemoMvc.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            product product = db.product.Find(id);
+            //product product = db.product.Find(id);
+            product product = repo_product.Get(p => p.p_prodid == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -50,8 +55,9 @@ namespace DemoMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.product.Add(product);
-                db.SaveChanges();
+                //db.product.Add(product);
+                //db.SaveChanges();
+                repo_product.Add(product);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +71,8 @@ namespace DemoMvc.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            product product = db.product.Find(id);
+            //product product = db.product.Find(id);
+            product product = repo_product.Get(p => p.p_prodid == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -82,8 +89,9 @@ namespace DemoMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(product).State = EntityState.Modified;
+                //db.SaveChanges();
+                repo_product.Update(product);
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -96,7 +104,8 @@ namespace DemoMvc.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            product product = db.product.Find(id);
+            //product product = db.product.Find(id);
+            product product = repo_product.Get(p => p.p_prodid == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -109,9 +118,11 @@ namespace DemoMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            product product = db.product.Find(id);
-            db.product.Remove(product);
-            db.SaveChanges();
+            //product product = db.product.Find(id);
+            //db.product.Remove(product);
+            //db.SaveChanges();
+            product product = repo_product.Get(p => p.p_prodid == id);
+            repo_product.Delete(product);
             return RedirectToAction("Index");
         }
 
